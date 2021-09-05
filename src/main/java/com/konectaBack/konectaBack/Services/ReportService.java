@@ -6,7 +6,9 @@ import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ResourceUtils;
+import javax.persistence.EntityManager;
 
+import javax.persistence.TypedQuery;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.HashMap;
@@ -16,6 +18,7 @@ import java.util.Map;
 @Service
 public class ReportService {
 
+    protected EntityManager entityManager;
     private CitaRepository citaRepository;
 
     public ReportService(CitaRepository citaRepository) {
@@ -46,6 +49,21 @@ public class ReportService {
         File file = ResourceUtils.getFile("classpath:Reports/cita.jrxml");
         JasperReport jasperReport = JasperCompileManager.compileReport(file.getAbsolutePath());
         JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(citas);
+        Map<String, Object> parameters = new HashMap<>();
+        parameters.put("createdBy", "Samuel");
+        JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, dataSource);
+        return  JasperExportManager.exportReportToPdf(jasperPrint);
+    }
+
+    public byte[] exportReportReturnJoin() throws FileNotFoundException, JRException {
+        TypedQuery<Cita> query = entityManager.createQuery(
+                "SELECT d" +
+                        " FROM Cita c JOIN c.idMedico d", Cita.class);
+        List<Cita> resultList = query.getResultList();
+
+        File file = ResourceUtils.getFile("classpath:Reports/citaJoinMedico.jrxml");
+        JasperReport jasperReport = JasperCompileManager.compileReport(file.getAbsolutePath());
+        JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(resultList);
         Map<String, Object> parameters = new HashMap<>();
         parameters.put("createdBy", "Samuel");
         JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, dataSource);

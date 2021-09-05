@@ -27,7 +27,8 @@ public class Cita  implements Serializable {
     private Date fechaFin;
 
     @Column(name = "id_medico")
-    private int idMedico;
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "Cita")
+    private Medico idMedico;
 
     @Column(name = "id_paciente")
     private  int idPaciente;

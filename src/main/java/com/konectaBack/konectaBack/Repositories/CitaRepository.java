@@ -18,4 +18,6 @@ public interface CitaRepository extends CrudRepository<Cita,Integer> {
     Cita findById(int id);
     Cita findByFechaInicioBeforeAndFechaFinAfterAndIdMedico(Date inicio, Date fin, int idMedico);
     Cita findByFechaInicioAndFechaFinAndIdMedico(Date inicio, Date fin, int idMedico);
+    
+    List<Cita> findByIdMedico(Integer id);
 }
