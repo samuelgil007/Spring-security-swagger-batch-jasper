@@ -25,19 +25,30 @@ public class ReportService {
     public String exportReport(String reportFormat) throws FileNotFoundException, JRException {
         String path = "/home/samuelg/Desktop";
         List<Cita> citas = citaRepository.findAll();
-        File file = ResourceUtils.getFile("classpath:employees.jrxml");
+        File file = ResourceUtils.getFile("classpath:Reports/cita.jrxml");
         JasperReport jasperReport = JasperCompileManager.compileReport(file.getAbsolutePath());
         JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(citas);
         Map<String, Object> parameters = new HashMap<>();
         parameters.put("createdBy", "Samuel");
         JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, dataSource);
         if (reportFormat.equalsIgnoreCase("html")) {
-            JasperExportManager.exportReportToHtmlFile(jasperPrint, path + "/employees.html");
+            JasperExportManager.exportReportToHtmlFile(jasperPrint, path + "/citas.html");
         }
         if (reportFormat.equalsIgnoreCase("pdf")) {
-            JasperExportManager.exportReportToPdfFile(jasperPrint, path + "/employees.pdf");
+            JasperExportManager.exportReportToPdfFile(jasperPrint, path + "/citas.pdf");
+            JasperExportManager.exportReportToPdf(jasperPrint);
         }
-
         return "report generated in path : " + path;
+    }
+
+    public byte[] exportReportReturn() throws FileNotFoundException, JRException {
+        List<Cita> citas = citaRepository.findAll();
+        File file = ResourceUtils.getFile("classpath:Reports/cita.jrxml");
+        JasperReport jasperReport = JasperCompileManager.compileReport(file.getAbsolutePath());
+        JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(citas);
+        Map<String, Object> parameters = new HashMap<>();
+        parameters.put("createdBy", "Samuel");
+        JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, dataSource);
+        return  JasperExportManager.exportReportToPdf(jasperPrint);
     }
 }

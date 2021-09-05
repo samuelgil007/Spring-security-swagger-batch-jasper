@@ -3,11 +3,11 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="cita" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="25ff0f98-e07e-46ea-95ce-fe25ed3503d3">
 
     <field name="id" class="java.lang.Integer"/>
-    <field name="fecha_inicio" class="java.sql.Timestamp"/>
-    <field name="fecha_fin" class="java.sql.Timestamp"/>
-    <field name="id_medico" class="java.lang.Integer"/>
-    <field name="id_paciente" class="java.lang.Integer"/>
-    <field name="tipo_atencion" class="java.lang.String"/>
+    <field name="fechaInicio" class="java.sql.Timestamp"/>
+    <field name="fechaFin" class="java.sql.Timestamp"/>
+    <field name="idMedico" class="java.lang.Integer"/>
+    <field name="idPaciente" class="java.lang.Integer"/>
+    <field name="tipoAtencion" class="java.lang.String"/>
     <field name="detalle" class="java.lang.String"/>
     <group name="Group1">
         <groupExpression><![CDATA[$F{id}]]></groupExpression>
@@ -37,7 +37,7 @@
         </groupFooter>
     </group>
     <group name="Group2">
-        <groupExpression><![CDATA[$F{fecha_inicio}]]></groupExpression>
+        <groupExpression><![CDATA[$F{fechaInicio}]]></groupExpression>
         <groupHeader>
             <band height="32">
                 <textField>
@@ -45,14 +45,14 @@
                     <textElement>
                         <font size="22" isBold="true"/>
                     </textElement>
-                    <textFieldExpression><![CDATA[$F{fecha_inicio}]]></textFieldExpression>
+                    <textFieldExpression><![CDATA[$F{fechaInicio}]]></textFieldExpression>
                 </textField>
                 <staticText>
                     <reportElement x="0" y="0" width="100" height="20" forecolor="#666666" uuid="13687b5e-8cfb-4368-b5d3-b232bd308553"/>
                     <textElement>
                         <font size="12"/>
                     </textElement>
-                    <text><![CDATA[fecha_inicio]]></text>
+                    <text><![CDATA[fechaInicio]]></text>
                 </staticText>
             </band>
         </groupHeader>
@@ -61,7 +61,7 @@
         </groupFooter>
     </group>
     <group name="Group3">
-        <groupExpression><![CDATA[$F{fecha_fin}]]></groupExpression>
+        <groupExpression><![CDATA[$F{fechaFin}]]></groupExpression>
         <groupHeader>
             <band height="32">
                 <textField>
@@ -69,14 +69,14 @@
                     <textElement>
                         <font size="20" isBold="true"/>
                     </textElement>
-                    <textFieldExpression><![CDATA[$F{fecha_fin}]]></textFieldExpression>
+                    <textFieldExpression><![CDATA[$F{fechaFin}]]></textFieldExpression>
                 </textField>
                 <staticText>
                     <reportElement x="0" y="0" width="100" height="20" forecolor="#666666" uuid="a243ed4c-9a67-4e12-ab7b-7f31c61cf69d"/>
                     <textElement>
                         <font size="12"/>
                     </textElement>
-                    <text><![CDATA[fecha_fin]]></text>
+                    <text><![CDATA[fechaFin]]></text>
                 </staticText>
             </band>
         </groupHeader>
@@ -85,7 +85,7 @@
         </groupFooter>
     </group>
     <group name="Group4">
-        <groupExpression><![CDATA[$F{id_medico}]]></groupExpression>
+        <groupExpression><![CDATA[$F{idMedico}]]></groupExpression>
         <groupHeader>
             <band height="32">
                 <textField>
@@ -93,14 +93,14 @@
                     <textElement>
                         <font size="16" isBold="true"/>
                     </textElement>
-                    <textFieldExpression><![CDATA[$F{id_medico}]]></textFieldExpression>
+                    <textFieldExpression><![CDATA[$F{idMedico}]]></textFieldExpression>
                 </textField>
                 <staticText>
                     <reportElement x="0" y="0" width="100" height="20" forecolor="#666666" uuid="eb8cd8b0-4243-41b2-8ef5-0c7c17fde2c6"/>
                     <textElement>
                         <font size="12"/>
                     </textElement>
-                    <text><![CDATA[id_medico]]></text>
+                    <text><![CDATA[idMedico]]></text>
                 </staticText>
             </band>
         </groupHeader>
@@ -109,10 +109,10 @@
         </groupFooter>
     </group>
     <group name="id_paciente">
-        <groupExpression><![CDATA[$F{id_paciente}]]></groupExpression>
+        <groupExpression><![CDATA[$F{idPaciente}]]></groupExpression>
     </group>
     <group name="tipo_atencion">
-        <groupExpression><![CDATA[$F{tipo_atencion}]]></groupExpression>
+        <groupExpression><![CDATA[$F{tipoAtencion}]]></groupExpression>
     </group>
     <group name="detalle">
         <groupExpression><![CDATA[$F{detalle}]]></groupExpression>
@@ -129,14 +129,14 @@
                     <textElement>
                         <font size="34" isBold="true"/>
                     </textElement>
-                    <text><![CDATA[TITLE]]></text>
+                    <text><![CDATA[Citas]]></text>
                 </staticText>
                 <staticText>
                     <reportElement x="395" y="43" width="180" height="20" forecolor="#FFFFFF" uuid="51b2ce1c-cd11-4cd9-997d-7f11ab60b5f7"/>
                     <textElement textAlignment="Right">
                         <font size="14" isBold="false"/>
                     </textElement>
-                    <text><![CDATA[Add a description here]]></text>
+                    <text><![CDATA[Citas existentes.]]></text>
                 </staticText>
             </frame>
         </band>
