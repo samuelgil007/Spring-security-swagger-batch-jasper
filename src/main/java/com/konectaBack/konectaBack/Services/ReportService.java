@@ -2,6 +2,7 @@ package com.konectaBack.konectaBack.Services;
 
 import com.konectaBack.konectaBack.Models.Cita;
 import com.konectaBack.konectaBack.Repositories.CitaRepository;
+import com.konectaBack.konectaBack.Repositories.QueryRepository;
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import org.springframework.stereotype.Service;
@@ -20,6 +21,7 @@ public class ReportService {
 
     protected EntityManager entityManager;
     private CitaRepository citaRepository;
+    private QueryRepository queryRepository;
 
     public ReportService(CitaRepository citaRepository) {
         this.citaRepository = citaRepository;
@@ -56,14 +58,11 @@ public class ReportService {
     }
 
     public byte[] exportReportReturnJoin() throws FileNotFoundException, JRException {
-        TypedQuery<Cita> query = entityManager.createQuery(
-                "SELECT d" +
-                        " FROM Cita c JOIN c.idMedico d", Cita.class);
-        List<Cita> resultList = query.getResultList();
-
+        List<Object> informaciones = queryRepository.findCitaJoinMedico();
+        System.out.println(informaciones);
         File file = ResourceUtils.getFile("classpath:Reports/citaJoinMedico.jrxml");
         JasperReport jasperReport = JasperCompileManager.compileReport(file.getAbsolutePath());
-        JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(resultList);
+        JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(informaciones);
         Map<String, Object> parameters = new HashMap<>();
         parameters.put("createdBy", "Samuel");
         JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, dataSource);

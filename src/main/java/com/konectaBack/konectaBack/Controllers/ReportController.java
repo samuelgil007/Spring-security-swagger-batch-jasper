@@ -32,4 +32,12 @@ public class ReportController {
                 .contentType(MediaType.parseMediaType("application/pdf"))
                 .body(reportService.exportReportReturn());
     }
+
+    @GetMapping("/reportereturnjoin")
+    public ResponseEntity<byte[]> reportePdfJoin() throws JRException, FileNotFoundException {
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=\"" + "CitaReporte.pdf" + "\"")
+                .contentType(MediaType.parseMediaType("application/pdf"))
+                .body(reportService.exportReportReturnJoin());
+    }
 }
