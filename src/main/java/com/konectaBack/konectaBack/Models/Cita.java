@@ -27,7 +27,8 @@ public class Cita  implements Serializable {
     private Date fechaFin;
 
     @OneToOne(targetEntity = Medico.class,cascade = CascadeType.ALL)
-    @JoinColumn(name= "id_medico",referencedColumnName = "id")
+    @JoinColumn(name= "id_medico",referencedColumnName = "id",
+            foreignKey = @ForeignKey(name = "fk_Cita_Medico"))
     private Medico idMedico;
 
     @Column(name = "id_paciente")

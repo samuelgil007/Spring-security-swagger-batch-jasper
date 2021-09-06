@@ -9548,3 +9548,55 @@ net.sf.jasperreports.engine.JRException: Errors were encountered when compiling 
 2021-09-05 20:26:07.057 DEBUG 49672 --- [http-nio-8080-exec-2] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json;q=0.8', given [image/avif, image/webp, image/apng, image/svg+xml, image/*, */*;q=0.8] and supported [application/json, application/*+json, application/json, application/*+json]
 2021-09-05 20:26:07.058 DEBUG 49672 --- [http-nio-8080-exec-2] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{timestamp=Sun Sep 05 20:26:07 COT 2021, status=403, error=Forbidden, path=/favicon.ico}]
 2021-09-05 20:26:07.105 DEBUG 49672 --- [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Exiting from "ERROR" dispatch, status 403
+2021-09-05 20:28:52.733  INFO 49672 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2021-09-05 20:28:52.735  INFO 49672 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2021-09-05 20:28:59.544  INFO 49672 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2021-09-05 20:47:13.145  INFO 51379 --- [main] c.k.konectaBack.KonectaBackApplication   : Starting KonectaBackApplication using Java 15.0.2 on samuelg-Satellite-C45-A with PID 51379 (/home/samuelg/Documents/PruebaKonecta/Spring-security-swagger-batch-jasper/target/classes started by samuelg in /home/samuelg/Documents/PruebaKonecta/Spring-security-swagger-batch-jasper)
+2021-09-05 20:47:13.148  INFO 51379 --- [main] c.k.konectaBack.KonectaBackApplication   : No active profile set, falling back to default profiles: default
+2021-09-05 20:47:14.606  INFO 51379 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2021-09-05 20:47:14.673  INFO 51379 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 60 ms. Found 5 JPA repository interfaces.
+2021-09-05 20:47:15.327  INFO 51379 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2021-09-05 20:47:15.338  INFO 51379 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2021-09-05 20:47:15.339  INFO 51379 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.50]
+2021-09-05 20:47:15.459  INFO 51379 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2021-09-05 20:47:15.460  INFO 51379 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2238 ms
+2021-09-05 20:47:15.646  INFO 51379 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2021-09-05 20:47:17.497  INFO 51379 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2021-09-05 20:47:17.551  INFO 51379 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2021-09-05 20:47:17.586  INFO 51379 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.4.32.Final
+2021-09-05 20:47:17.721  INFO 51379 --- [main] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2021-09-05 20:47:17.786  INFO 51379 --- [main] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2021-09-05 20:47:18.478  INFO 51379 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2021-09-05 20:47:18.486  INFO 51379 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2021-09-05 20:47:18.999  WARN 51379 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2021-09-05 20:47:19.795 DEBUG 51379 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : 26 mappings in 'requestMappingHandlerMapping'
+2021-09-05 20:47:20.082 DEBUG 51379 --- [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/webjars/**, /**, /swagger-ui.html] in 'resourceHandlerMapping'
+2021-09-05 20:47:20.118  INFO 51379 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@6ce1cc03, org.springframework.security.web.context.SecurityContextPersistenceFilter@773cc551, org.springframework.security.web.header.HeaderWriterFilter@5bed8b91, org.springframework.web.filter.CorsFilter@b1e63b5, org.springframework.security.web.authentication.logout.LogoutFilter@755fdfad, com.konectaBack.konectaBack.utils.Filtro@6d4f266, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@6edb093f, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@55a2ca5e, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@186537ac, org.springframework.security.web.session.SessionManagementFilter@eb66b47, org.springframework.security.web.access.ExceptionTranslationFilter@2eed6331, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@5cb64b9c]
+2021-09-05 20:47:20.263 DEBUG 51379 --- [main] s.w.s.m.m.a.RequestMappingHandlerAdapter : ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2021-09-05 20:47:20.298 DEBUG 51379 --- [main] .m.m.a.ExceptionHandlerExceptionResolver : ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
+2021-09-05 20:47:20.591  INFO 51379 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2021-09-05 20:47:21.036  INFO 51379 --- [main] c.k.konectaBack.KonectaBackApplication   : Started KonectaBackApplication in 8.45 seconds (JVM running for 9.509)
+2021-09-05 20:47:43.462  INFO 51379 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2021-09-05 20:47:43.462  INFO 51379 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2021-09-05 20:47:43.462 DEBUG 51379 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Detected StandardServletMultipartResolver
+2021-09-05 20:47:43.463 DEBUG 51379 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Detected AcceptHeaderLocaleResolver
+2021-09-05 20:47:43.463 DEBUG 51379 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Detected FixedThemeResolver
+2021-09-05 20:47:43.464 DEBUG 51379 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Detected org.springframework.web.servlet.view.DefaultRequestToViewNameTranslator@1c4a8c93
+2021-09-05 20:47:43.465 DEBUG 51379 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Detected org.springframework.web.servlet.support.SessionFlashMapManager@7a553110
+2021-09-05 20:47:43.465 DEBUG 51379 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : enableLoggingRequestDetails='false': request parameters and headers will be masked to prevent unsafe logging of potentially sensitive data
+2021-09-05 20:47:43.465  INFO 51379 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 3 ms
+2021-09-05 20:47:43.478 DEBUG 51379 --- [http-nio-8080-exec-1] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.konectaBack.konectaBack.Controllers.ReportController#reportePdfJoin()
+2021-09-05 20:47:43.487 DEBUG 51379 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : GET "/reportereturnjoin", parameters={}
+2021-09-05 20:47:43.490 DEBUG 51379 --- [http-nio-8080-exec-1] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.konectaBack.konectaBack.Controllers.ReportController#reportePdfJoin()
+2021-09-05 20:47:45.173 DEBUG 51379 --- [http-nio-8080-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Found 'Content-Type:application/pdf' in response
+2021-09-05 20:47:45.174 DEBUG 51379 --- [http-nio-8080-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [[B@1061d8c]
+2021-09-05 20:47:45.182 DEBUG 51379 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2021-09-05 20:47:45.367 DEBUG 51379 --- [http-nio-8080-exec-2] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [Classpath [META-INF/resources/], Classpath [resources/], Classpath [static/], Classpath [public/], ServletContext [/]]
+2021-09-05 20:47:45.378 DEBUG 51379 --- [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : "ERROR" dispatch for GET "/error", parameters={}
+2021-09-05 20:47:45.385 DEBUG 51379 --- [http-nio-8080-exec-2] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2021-09-05 20:47:45.401 DEBUG 51379 --- [http-nio-8080-exec-2] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json;q=0.8', given [image/avif, image/webp, image/apng, image/svg+xml, image/*, */*;q=0.8] and supported [application/json, application/*+json, application/json, application/*+json]
+2021-09-05 20:47:45.402 DEBUG 51379 --- [http-nio-8080-exec-2] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{timestamp=Sun Sep 05 20:47:45 COT 2021, status=403, error=Forbidden, path=/favicon.ico}]
+2021-09-05 20:47:45.458 DEBUG 51379 --- [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Exiting from "ERROR" dispatch, status 403
+2021-09-05 20:49:04.796  INFO 51379 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2021-09-05 20:49:04.798  INFO 51379 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2021-09-05 20:49:06.467  INFO 51379 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
