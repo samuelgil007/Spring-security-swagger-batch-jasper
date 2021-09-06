@@ -14,6 +14,13 @@ import java.util.Date;
 @Table(name = "Medico")
 public class Medico implements Serializable {
 
+    public Medico(@NonNull String nombre, @NonNull String apellido, @NonNull String estado, @NonNull int idUsuario) {
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.estado = estado;
+        this.idUsuario = idUsuario;
+    }
+
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     @NonNull

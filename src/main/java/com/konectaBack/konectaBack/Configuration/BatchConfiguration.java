@@ -34,10 +34,10 @@ public class BatchConfiguration {
     @Bean
     public FlatFileItemReader<Medico> reader(){
         return new FlatFileItemReaderBuilder<Medico>()
-                .name("personaItemReader")
-                .resource(new ClassPathResource("sample-data.csv"))
+                .name("MedicoItemReader")
+                .resource(new ClassPathResource("Medicos.csv"))
                 .delimited()
-                .names(new String[] {"nombre", "apellido", "id"})
+                .names(new String[] {"nombre", "apellido","estado", "idUsuario" })
                 .fieldSetMapper(new BeanWrapperFieldSetMapper<Medico>() {{
                     setTargetType(Medico.class);
                 }})
@@ -52,8 +52,8 @@ public class BatchConfiguration {
     @Bean
     public JdbcBatchItemWriter<Medico> writer(DataSource dataSource){
         return new JdbcBatchItemWriterBuilder<Medico>()
-                .itemSqlParameterSourceProvider(new BeanPropertyItemSqlParameterSourceProvider<>())
-                .sql("INSERT INTO persona (nombre, apellido, id) VALUES (:nombre, :apellido, :id)")
+                .itemSqlParameterSourceProvider(new BeanPropertyItemSqlParameterSourceProvider<Medico>())
+                .sql("INSERT INTO Medico ( nombre, apellido, estado, id_usuario) VALUES ( :nombre, :apellido, :estado, :idUsuario)")
                 .dataSource(dataSource)
                 .build();
     }
@@ -73,6 +73,7 @@ public class BatchConfiguration {
         return stepBuilderFactory.get("step1")
                 .<Medico, Medico> chunk(10)
                 .reader(reader())
+                .processor(processor())
                 .writer(writer)
                 .build();
     }

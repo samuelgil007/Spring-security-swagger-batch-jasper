@@ -11,6 +11,7 @@ public class MedicoItemProcessor implements ItemProcessor<Medico,Medico > {
     @Override
     public Medico process(Medico item) throws Exception {
         item.setNombre(item.getNombre().toUpperCase());
+        //System.out.println("llega");
         return item;
     }
 }
