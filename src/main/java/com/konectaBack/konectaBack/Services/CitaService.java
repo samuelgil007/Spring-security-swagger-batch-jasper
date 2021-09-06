@@ -5,8 +5,8 @@ import com.konectaBack.konectaBack.DTOs.CitaDTO;
 import com.konectaBack.konectaBack.DTOs.Responses.ErrorResponse;
 import com.konectaBack.konectaBack.DTOs.Responses.Response;
 import com.konectaBack.konectaBack.Models.Cita;
-import com.konectaBack.konectaBack.Models.Medico;
 import com.konectaBack.konectaBack.Repositories.CitaRepository;
+import com.konectaBack.konectaBack.Repositories.MedicoRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,9 +17,11 @@ import java.util.List;
 public class CitaService {
 
     private CitaRepository citaRepository;
+    private MedicoRepository medicoRepository;
 
-    public CitaService(CitaRepository citaRepository) {
+    public CitaService(CitaRepository citaRepository, MedicoRepository medicoRepository) {
         this.citaRepository = citaRepository;
+        this.medicoRepository = medicoRepository;
     }
 
     @Transactional
@@ -27,7 +29,7 @@ public class CitaService {
         if (puedeAgendarCita(cita,false)) {
             try {
                 Cita citaGuardada = citaRepository.save(
-                        CitaDTOMapper.mapearCita(cita)
+                        CitaDTOMapper.mapearCita(cita, medicoRepository.findById(cita.getIdMedico()))
                 );
                 return Response.builder()
                         .status(201)
@@ -90,7 +92,7 @@ public class CitaService {
     public Response modificarCita(CitaDTO cita, int id) {
         cita.setId(id);
         if (puedeAgendarCita(cita,true)) {
-                    citaRepository.save(CitaDTOMapper.mapearCita(cita));
+                    citaRepository.save(CitaDTOMapper.mapearCita(cita, medicoRepository.findById(cita.getIdMedico())));
                     return Response.builder()
                             .status(200)
                             .payload(cita)

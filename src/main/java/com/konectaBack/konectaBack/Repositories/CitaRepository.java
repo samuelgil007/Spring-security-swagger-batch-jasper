@@ -1,9 +1,10 @@
 package com.konectaBack.konectaBack.Repositories;
 
 import com.konectaBack.konectaBack.Models.Cita;
+import com.konectaBack.konectaBack.Models.Queries.CitaJoin;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
-
 import java.util.Date;
 import java.util.List;
 
@@ -18,6 +19,9 @@ public interface CitaRepository extends CrudRepository<Cita,Integer> {
     Cita findById(int id);
     Cita findByFechaInicioBeforeAndFechaFinAfterAndIdMedico(Date inicio, Date fin, int idMedico);
     Cita findByFechaInicioAndFechaFinAndIdMedico(Date inicio, Date fin, int idMedico);
-    
-    List<Cita> findByIdMedico(Integer id);
+
+    @Query("SELECT new com.konectaBack.konectaBack.Models.Queries.CitaJoin(c.id ," +
+            " c.fechaInicio, c.fechaFin, c.tipoAtencion, p.nombre, p.apellido) " +
+            "FROM Cita c JOIN c.idMedico p")
+    List<CitaJoin> findJoinByIdMedico();
 }

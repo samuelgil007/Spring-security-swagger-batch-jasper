@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.17.0.final using JasperReports Library version 6.17.0-6d93193241dd8cc42629e188b94f9e0bc5722efd  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Cita-join" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="7a5c9b49-9dc5-422a-ac69-e92cf61ef530">
-    <property name="com.jaspersoft.studio.data.sql.tables" value=""/>
-    <property name="com.jaspersoft.studio.data.defaultdataadapter" value="Sample DB"/>
     <style name="Title" forecolor="#FFFFFF" fontName="Times New Roman" fontSize="50" isBold="false"/>
     <style name="SubTitle" forecolor="#CCCCCC" fontName="Times New Roman" fontSize="18" isBold="false"/>
     <style name="Column header" forecolor="#666666" fontName="Times New Roman" fontSize="14" isBold="true"/>
@@ -13,46 +11,17 @@
             <style mode="Opaque" backcolor="#F0EFEF"/>
         </conditionalStyle>
     </style>
-    <queryString language="SQL">
-        <![CDATA[SELECT * FROM bprqdfvzzqrujtkkjd6l.`Cita`
-JOIN  bprqdfvzzqrujtkkjd6l.`Medico`
-ON bprqdfvzzqrujtkkjd6l.`Cita`.id_medico=bprqdfvzzqrujtkkjd6l.`Medico`.id]]>
-    </queryString>
     <field name="id" class="java.lang.Integer">
-        <property name="com.jaspersoft.studio.field.name" value="id"/>
-        <property name="com.jaspersoft.studio.field.label" value="id"/>
-        <property name="com.jaspersoft.studio.field.tree.path" value="Cita"/>
-        <fieldDescription><![CDATA[]]></fieldDescription>
     </field>
     <field name="fechaInicio" class="java.sql.Timestamp">
-        <property name="com.jaspersoft.studio.field.name" value="fechaInicio"/>
-        <property name="com.jaspersoft.studio.field.label" value="fechaInicio"/>
-        <property name="com.jaspersoft.studio.field.tree.path" value="Cita"/>
-        <fieldDescription><![CDATA[]]></fieldDescription>
     </field>
     <field name="fechaFin" class="java.sql.Timestamp">
-        <property name="com.jaspersoft.studio.field.name" value="fechaFin"/>
-        <property name="com.jaspersoft.studio.field.label" value="fechaFin"/>
-        <property name="com.jaspersoft.studio.field.tree.path" value="Cita"/>
-        <fieldDescription><![CDATA[]]></fieldDescription>
     </field>
     <field name="nombre" class="java.lang.String">
-        <property name="com.jaspersoft.studio.field.name" value="nombre"/>
-        <property name="com.jaspersoft.studio.field.label" value="nombre"/>
-        <property name="com.jaspersoft.studio.field.tree.path" value="Medico"/>
-        <fieldDescription><![CDATA[]]></fieldDescription>
     </field>
     <field name="apellido" class="java.lang.String">
-        <property name="com.jaspersoft.studio.field.name" value="apellido"/>
-        <property name="com.jaspersoft.studio.field.label" value="apellido"/>
-        <property name="com.jaspersoft.studio.field.tree.path" value="Medico"/>
-        <fieldDescription><![CDATA[]]></fieldDescription>
     </field>
     <field name="tipoAtencion" class="java.lang.String">
-        <property name="com.jaspersoft.studio.field.name" value="tipoAtencion"/>
-        <property name="com.jaspersoft.studio.field.label" value="tipoAtencion"/>
-        <property name="com.jaspersoft.studio.field.tree.path" value="Cita"/>
-        <fieldDescription><![CDATA[]]></fieldDescription>
     </field>
     <group name="Group1">
         <groupExpression><![CDATA[$F{id}]]></groupExpression>
@@ -96,25 +65,65 @@ ON bprqdfvzzqrujtkkjd6l.`Cita`.id_medico=bprqdfvzzqrujtkkjd6l.`Medico`.id]]>
     </group>
     <group name="fecha_fin">
         <groupExpression><![CDATA[$F{fechaFin}]]></groupExpression>
+        <groupHeader>
+            <band height="30">
+                <textField>
+                    <reportElement positionType="Float" x="0" y="4" width="802" height="26" forecolor="#000000" uuid="c09ae599-41a3-4b19-8a1e-72af405a3627"/>
+                    <textElement>
+                        <font fontName="Times New Roman" size="16" isBold="false"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA[$F{fechaFin}]]></textFieldExpression>
+                </textField>
+            </band>
+        </groupHeader>
     </group>
     <group name="nombre">
         <groupExpression><![CDATA[$F{nombre}]]></groupExpression>
+        <groupHeader>
+            <band height="30">
+                <textField>
+                    <reportElement positionType="Float" x="0" y="4" width="802" height="26" forecolor="#000000" uuid="c09ae599-41a3-4b19-8a1e-72af405a3627"/>
+                    <textElement>
+                        <font fontName="Times New Roman" size="16" isBold="false"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
+                </textField>
+            </band>
+        </groupHeader>
     </group>
     <group name="apellido">
         <groupExpression><![CDATA[$F{apellido}]]></groupExpression>
+        <groupHeader>
+            <band height="30">
+                <textField>
+                    <reportElement positionType="Float" x="0" y="4" width="802" height="26" forecolor="#000000" uuid="c09ae599-41a3-4b19-8a1e-72af405a3627"/>
+                    <textElement>
+                        <font fontName="Times New Roman" size="16" isBold="false"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA[$F{apellido}]]></textFieldExpression>
+                </textField>
+            </band>
+        </groupHeader>
     </group>
     <group name="tipo_atencion">
         <groupExpression><![CDATA[$F{tipoAtencion}]]></groupExpression>
+        <groupHeader>
+            <band height="30">
+                <textField>
+                    <reportElement positionType="Float" x="0" y="4" width="802" height="26" forecolor="#000000" uuid="c09ae599-41a3-4b19-8a1e-72af405a3627"/>
+                    <textElement>
+                        <font fontName="Times New Roman" size="16" isBold="false"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA[$F{tipoAtencion}]]></textFieldExpression>
+                </textField>
+            </band>
+        </groupHeader>
     </group>
     <background>
         <band splitType="Stretch"/>
     </background>
     <title>
         <band height="102" splitType="Stretch">
-            <image>
-                <reportElement x="725" y="0" width="77" height="102" uuid="651ccc4b-e999-40fe-bcbf-1f25bcfc98af"/>
-                <imageExpression><![CDATA["cherry.jpg"]]></imageExpression>
-            </image>
             <frame>
                 <reportElement mode="Opaque" x="0" y="0" width="721" height="66" backcolor="#000000" uuid="d8d9e644-3a32-491d-97cb-a277aff17133"/>
                 <staticText>
@@ -123,14 +132,14 @@ ON bprqdfvzzqrujtkkjd6l.`Cita`.id_medico=bprqdfvzzqrujtkkjd6l.`Medico`.id]]>
                     <textElement verticalAlignment="Bottom">
                         <font isBold="false"/>
                     </textElement>
-                    <text><![CDATA[Cherry Title]]></text>
+                    <text><![CDATA[Citas]]></text>
                 </staticText>
                 <staticText>
                     <reportElement style="SubTitle" x="370" y="37" width="316" height="29" uuid="cfa21334-0634-4605-9ea7-aca4981f67e4"/>
                     <textElement textAlignment="Right">
                         <font size="22" isBold="false"/>
                     </textElement>
-                    <text><![CDATA[Cherry SubTitle]]></text>
+                    <text><![CDATA[con Join Medico]]></text>
                 </staticText>
             </frame>
             <frame>

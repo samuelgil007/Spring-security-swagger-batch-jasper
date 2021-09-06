@@ -3,9 +3,10 @@ package com.konectaBack.konectaBack.DTOMappers;
 import com.konectaBack.konectaBack.DTOs.CitaDTO;
 import com.konectaBack.konectaBack.DTOs.MedicoDTO;
 import com.konectaBack.konectaBack.Models.Cita;
+import com.konectaBack.konectaBack.Models.Medico;
 
 public class CitaDTOMapper {
-    public static Cita mapearCita(CitaDTO cita){
+    public static Cita mapearCita(CitaDTO cita, Medico medico){
 
         return Cita.builder()
                 .id(cita.getId())
@@ -13,7 +14,7 @@ public class CitaDTOMapper {
                 .fechaInicio(cita.getFechaInicio())
                 .fechaFin(cita.getFechaFin())
                 .tipoAtencion(cita.getTipoAtencion())
-                .idMedico(cita.getIdMedico())
+                .idMedico(medico)
                 .idPaciente(cita.getIdPaciente())
                 .build();
     }
