@@ -14,6 +14,10 @@ import java.util.Date;
 @Table(name = "Medico")
 public class Medico implements Serializable {
 
+    public Medico(int id){
+        this.id = id;
+    }
+
     public Medico(@NonNull String nombre, @NonNull String apellido, @NonNull String estado, @NonNull int idUsuario) {
         this.nombre = nombre;
         this.apellido = apellido;
@@ -42,4 +46,5 @@ public class Medico implements Serializable {
     @NonNull
     @Column(name = "id_usuario")
     private int idUsuario;
+
 }

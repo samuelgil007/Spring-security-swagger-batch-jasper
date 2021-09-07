@@ -3,6 +3,7 @@ package com.konectaBack.konectaBack.Controllers;
 import com.konectaBack.konectaBack.Constants.ControllerConstants;
 import com.konectaBack.konectaBack.DTOs.CitaDTO;
 import com.konectaBack.konectaBack.DTOs.Responses.Response;
+import com.konectaBack.konectaBack.Models.Cita;
 import com.konectaBack.konectaBack.Services.CitaService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -10,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @CrossOrigin(ControllerConstants.FRONT_END)
@@ -28,16 +30,16 @@ public class CitaController {
     }
 
     @GetMapping(ControllerConstants.CITA)
-    public ResponseEntity<Object> retornarCitas(){
+    public ResponseEntity<List<Cita>> retornarCitas(){
         return new ResponseEntity<>(citaService.retornarCitas(), HttpStatus.OK);
     }
 
     @GetMapping(ControllerConstants.CITA_MEDICO_ID)
-    public ResponseEntity<Object> retornarCitasPorMedico(@PathVariable int id){
+    public ResponseEntity<List<Cita>> retornarCitasPorMedico(@PathVariable("id") int id){
         return new ResponseEntity<>(citaService.retornarCitasPorMedico(id), HttpStatus.OK);
     }
     @GetMapping(ControllerConstants.CITA_PACIENTE_ID)
-    public ResponseEntity<Object> retornarCitasPorPaciente(@PathVariable int id){
+    public ResponseEntity<List<Cita>> retornarCitasPorPaciente(@PathVariable int id){
         return new ResponseEntity<>(citaService.retornarCitasPorPaciente(id), HttpStatus.OK);
     }
 

@@ -5,11 +5,13 @@ import com.konectaBack.konectaBack.DTOs.CitaDTO;
 import com.konectaBack.konectaBack.DTOs.Responses.ErrorResponse;
 import com.konectaBack.konectaBack.DTOs.Responses.Response;
 import com.konectaBack.konectaBack.Models.Cita;
+import com.konectaBack.konectaBack.Models.Medico;
 import com.konectaBack.konectaBack.Repositories.CitaRepository;
 import com.konectaBack.konectaBack.Repositories.MedicoRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -39,7 +41,8 @@ public class CitaService {
                 return Response.builder()
                         .status(400)
                         .error(ErrorResponse.builder()
-                                .message("Hubo un error en la creación de la cita")
+                                .message("Hubo un error en la creación de la cita" +
+                                        " verifique los campos")
                                 .timestamp(new Date())
                                 .build())
                         .build();
@@ -61,7 +64,11 @@ public class CitaService {
 
     @Transactional(readOnly=true)
     public List<Cita> retornarCitasPorMedico(int id){
-        return citaRepository.findAllByIdMedico(id);
+        Medico medico = medicoRepository.findById(id);
+        if(medico != null){
+            return citaRepository.findAllByIdMedico(medico);
+        }
+        return new ArrayList<Cita>();
     }
 
     @Transactional(readOnly=true)
@@ -101,19 +108,19 @@ public class CitaService {
             return Response.builder()
                     .status(409)
                     .error(ErrorResponse.builder()
-                            .message("Ya existe una cita a esa hora con ese medico")
+                            .message("Hubo un error creando la cita, verifique los campos medico y hora cita")
                             .timestamp(new Date())
                             .build())
                     .build();
         }
 
     public Boolean puedeAgendarCita(CitaDTO cita, Boolean esEditada) {
-
+        Medico medico = medicoRepository.findById(cita.getIdMedico());
         Cita citaAGuardar = esEditada? citaRepository.findById(cita.getId()):null;
         Cita citaAdentroFechas = citaRepository.findByFechaInicioBeforeAndFechaFinAfterAndIdMedico
-                (cita.getFechaInicio(), cita.getFechaFin(), cita.getIdMedico());
+                (cita.getFechaInicio(), cita.getFechaFin(), medico);
         Cita citaMismaHora = citaRepository.findByFechaInicioAndFechaFinAndIdMedico
-                (cita.getFechaInicio(), cita.getFechaFin(), cita.getIdMedico());
+                (cita.getFechaInicio(), cita.getFechaFin(), medico );
         if (citaAdentroFechas == null && (citaMismaHora == citaAGuardar || citaMismaHora == null)) {
             return true;
         }
