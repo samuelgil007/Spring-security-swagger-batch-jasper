@@ -2,13 +2,16 @@ package com.konectaBack.konectaBack;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.konectaBack.konectaBack.Controllers.CitaController;
+import com.konectaBack.konectaBack.DTOMappers.CitaDTOMapper;
 import com.konectaBack.konectaBack.DTOs.CitaDTO;
 import com.konectaBack.konectaBack.DTOs.Responses.Response;
 import com.konectaBack.konectaBack.Models.Cita;
+import com.konectaBack.konectaBack.Models.Medico;
 import com.konectaBack.konectaBack.Repositories.CitaRepository;
 import com.konectaBack.konectaBack.Repositories.MedicoRepository;
 import com.konectaBack.konectaBack.Services.CitaService;
 import com.konectaBack.konectaBack.Services.LoginService;
+import com.konectaBack.konectaBack.Services.MedicoService;
 import com.konectaBack.konectaBack.utils.JwtUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.http.HttpStatus;
@@ -52,6 +55,9 @@ public class CitaControllerIntegrationTests {
     @MockBean
     public MedicoRepository medicoRepository;
 
+    @Mock
+    public CitaService citaService;
+
     @Autowired
     private MockMvc mockMvc;
 
@@ -77,9 +83,16 @@ public class CitaControllerIntegrationTests {
 
     @Test
     public void saveCita() throws Exception {
-        Mockito.when(citaRepository.save(new Cita())).thenReturn(new Cita());
+        Medico medico = new Medico();
+        medico.setId(1);
         CitaDTO citaDTO = new CitaDTO(
                 1,new Date(), new Date(),1,1,"sad", "as");
+        Cita cita = CitaDTOMapper.mapearCita(citaDTO, medico);
+        Mockito.when(citaRepository.save(cita)).thenReturn(cita);
+        Response response = new Response();
+        response.setPayload(cita);
+        Mockito.when(citaService.crearCita(citaDTO)).thenReturn(response);
+
         this.mockMvc.perform(post("/cita").header("Authorization", "Bearer " + token)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(asJsonString(citaDTO))
