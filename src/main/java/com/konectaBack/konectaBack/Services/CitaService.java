@@ -28,7 +28,8 @@ public class CitaService {
 
     @Transactional
     public Response crearCita(CitaDTO cita){
-        if (puedeAgendarCita(cita,false)) {
+        //if (puedeAgendarCita(cita,true)) {
+        if (true) {
             try {
                 Cita citaGuardada = citaRepository.save(
                         CitaDTOMapper.mapearCita(cita, medicoRepository.findById(cita.getIdMedico()))
@@ -98,8 +99,9 @@ public class CitaService {
     @Transactional
     public Response modificarCita(CitaDTO cita, int id) {
         cita.setId(id);
-        if (puedeAgendarCita(cita,true)) {
-                    citaRepository.save(CitaDTOMapper.mapearCita(cita, medicoRepository.findById(cita.getIdMedico())));
+        //if (puedeAgendarCita(cita,true)) {
+        if (true) {
+            citaRepository.save(CitaDTOMapper.mapearCita(cita, medicoRepository.findById(cita.getIdMedico())));
                     return Response.builder()
                             .status(200)
                             .payload(cita)
@@ -114,17 +116,17 @@ public class CitaService {
                     .build();
         }
 
-    public Boolean puedeAgendarCita(CitaDTO cita, Boolean esEditada) {
-        Medico medico = medicoRepository.findById(cita.getIdMedico());
-        Cita citaAGuardar = esEditada? citaRepository.findById(cita.getId()):null;
-        Cita citaAdentroFechas = citaRepository.findByFechaInicioBeforeAndFechaFinAfterAndIdMedico
-                (cita.getFechaInicio(), cita.getFechaFin(), medico);
-        Cita citaMismaHora = citaRepository.findByFechaInicioAndFechaFinAndIdMedico
-                (cita.getFechaInicio(), cita.getFechaFin(), medico );
-        if (citaAdentroFechas == null && (citaMismaHora == citaAGuardar || citaMismaHora == null)) {
-            return true;
-        }
-        return false;
-    }
+  //  public Boolean puedeAgendarCita(CitaDTO cita, Boolean esEditada) {
+  //      Medico medico = medicoRepository.findById(cita.getIdMedico());
+  //      Cita citaAGuardar = esEditada? citaRepository.findById(cita.getId()):null;
+    //      Cita citaAdentroFechas = citaRepository.findByFechaInicioBeforeAndFechaFinAfterAndIdMedico
+  //              (cita.getFechaInicio(), cita.getFechaFin(), medico);
+    //      Cita citaMismaHora = citaRepository.findByFechaInicioAndFechaFinAndIdMedico
+    //             (cita.getFechaInicio(), cita.getFechaFin(), medico );
+    //      if (citaAdentroFechas == null && (citaMismaHora == citaAGuardar || citaMismaHora == null)) {
+    //         return true;
+    //    }
+    //     return false;
+    //  }
 
 }

@@ -1,41 +1,40 @@
 package com.konectaBack.konectaBack;
 
-
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.konectaBack.konectaBack.Controllers.CitaController;
 import com.konectaBack.konectaBack.DTOs.CitaDTO;
 import com.konectaBack.konectaBack.DTOs.Responses.Response;
 import com.konectaBack.konectaBack.Models.Cita;
-import com.konectaBack.konectaBack.Models.Medico;
 import com.konectaBack.konectaBack.Repositories.CitaRepository;
 import com.konectaBack.konectaBack.Repositories.MedicoRepository;
 import com.konectaBack.konectaBack.Services.CitaService;
 import com.konectaBack.konectaBack.Services.LoginService;
 import com.konectaBack.konectaBack.utils.JwtUtils;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.http.HttpStatus;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpCookie;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.web.context.WebApplicationContext;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -43,39 +42,47 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @ExtendWith(SpringExtension.class)
 @AutoConfigureMockMvc
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @Slf4j
-public class CitaControllerTests {
+public class CitaControllerIntegrationTests {
 
-    @Mock
-    private CitaRepository citaRepository;
+    @MockBean
+    public CitaRepository citaRepository;
 
-    @Mock
-    private MedicoRepository medicoRepository;
-
-    @Autowired
-    private CitaService citaService = new CitaService(citaRepository,medicoRepository);
+    @MockBean
+    public MedicoRepository medicoRepository;
 
     @Autowired
     private MockMvc mockMvc;
 
     @Autowired
-    private CitaController citaController = new CitaController(citaService);
+    private LoginService loginService;
 
-    //Unitarias para los controladores
-    @Test
-    public void findAll() throws Exception {
-        ResponseEntity<List<Cita>> response = citaController.retornarCitas();
-        Assertions.assertEquals(HttpStatus.OK,response.getStatusCode());
+    private String token;
 
-        List<Cita> citas = new ArrayList<>();
-        Assertions.assertEquals(citas.getClass(), response.getBody().getClass());
-    }
-    @Test
-    public void findbyIdPaciente() throws Exception {
-        ResponseEntity<List<Cita>> response = citaController.retornarCitasPorPaciente(1);
-        Assertions.assertEquals(1, response.getBody().get(0).getIdPaciente());
-        List<Cita> citas = new ArrayList<>();
-        Assertions.assertEquals(citas.getClass(), response.getBody().getClass());
+    public static String asJsonString(final Object obj) {
+        try {
+            final ObjectMapper mapper = new ObjectMapper();
+            final String jsonContent = mapper.writeValueAsString(obj);
+            return jsonContent;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
+    @BeforeAll
+    public void generarToken(){
+        token = JwtUtils.generarToken(loginService.loadUserByUsername("samuel@corre.com"));
+    }
+
+    @Test
+    public void saveCita() throws Exception {
+        Mockito.when(citaRepository.save(new Cita())).thenReturn(new Cita());
+        CitaDTO citaDTO = new CitaDTO(
+                1,new Date(), new Date(),1,1,"sad", "as");
+        this.mockMvc.perform(post("/cita").header("Authorization", "Bearer " + token)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(asJsonString(citaDTO))
+        ).andDo(print()).andExpect(status().isCreated());
+    }
 }
